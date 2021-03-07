@@ -28,12 +28,21 @@ while running:
 			if event.key == pygame.K_w or event.key == pygame.K_UP:
 				if y > 550 and y +tall- 900 > -2* x and y +tall- 700 > 2*(x-600+fat) :
 					y -= speed
+				elif y > 550 and y +tall- 900 > -2* x:
+					x -= speed
+					y -= speed
+				elif y > 550 and y +tall- 700 > 2*(x-600+fat):
+					x += speed
+					y -= speed
+
 			elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
 				if y < 650:
 					y += speed
+
 			elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
 				if y +tall- 900 > -2* x:
 					x -= speed
+
 			elif event.key == pygame.K_d or event.key == pygame.K_RIGHT:
 				if y +tall- 700 > 2*(x-600+fat):
 					x += speed
