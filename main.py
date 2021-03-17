@@ -18,6 +18,11 @@ grey = (140, 140, 140)
 speed = 10
 tall, fat = 250, 150
 x, y = 200, 550
+
+#jump
+jumping = False
+jump_count = 10
+neg = 1
 		
 while running:
 	screen.fill(grey)
@@ -25,6 +30,9 @@ while running:
 		if event.type == pygame.QUIT:
 			running = False
 		if event.type == pygame.KEYDOWN:
+			if event.key == pygame.K_SPACE:
+				jumping = True
+
 			if event.key == pygame.K_w or event.key == pygame.K_UP:
 				if y > 550 and y +tall- 900 > -2* x and y +tall- 700 > 2*(x-600+fat) :
 					y -= speed
@@ -37,7 +45,7 @@ while running:
 
 			elif event.key == pygame.K_s or event.key == pygame.K_DOWN:
 				if y < 650:
-					y += speed
+					y += speed		
 
 			elif event.key == pygame.K_a or event.key == pygame.K_LEFT:
 				if y +tall- 900 > -2* x:
@@ -61,6 +69,18 @@ while running:
 	pygame.draw.line(screen, black, (600, 200), (width, 0), line_width)
 	pygame.draw.line(screen, black, (100, 700), (0, height), line_width)
 	pygame.draw.line(screen, black, (600, 700), (width, height), line_width)
+	
+	#jumping
+	if jumping == True:
+		neg = 1
+		if jump_count < 0:
+			neg = -1
+		if jump_count >= -10:
+			y -= (jump_count**2) * neg
+			jump_count -= 1
+		else:
+			jumping = False
+			jump_count = 10
 
 	#character
 	pygame.draw.rect(screen, black, (x-line_width, y-line_width, fat+(line_width*2), tall+(line_width*2)))
